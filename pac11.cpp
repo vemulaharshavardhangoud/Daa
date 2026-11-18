@@ -1,6 +1,8 @@
 
 #include <iostream>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
 #define INF 99999
 
@@ -22,8 +24,10 @@ int main() {
         }
     }
 
+    // Start execution time
+    auto start = high_resolution_clock::now();
+
     // Floyd-Warshall Algorithm
-    // k represents the intermediate vertex
     for (int k = 0; k < n; k++) {
 
         // Select source vertex
@@ -45,6 +49,14 @@ int main() {
         }
     }
 
+    // End execution time
+    auto end = high_resolution_clock::now();
+
+    // Calculate execution time
+    auto nano = duration_cast<nanoseconds>(end - start);
+    auto micro = duration_cast<microseconds>(end - start);
+    auto milli = duration_cast<milliseconds>(end - start);
+
     // Display shortest distance matrix
     cout << "\nAll-Pairs Shortest Distance Matrix:\n";
 
@@ -58,6 +70,12 @@ int main() {
         }
         cout << endl;
     }
+
+    // Display execution time
+    cout << "\n========== EXECUTION TIME ==========\n";
+    cout << "Nanoseconds  : " << nano.count() << " ns\n";
+    cout << "Microseconds : " << micro.count() << " us\n";
+    cout << "Milliseconds : " << milli.count() << " ms\n";
 
     return 0;
 }

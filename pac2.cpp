@@ -1,65 +1,85 @@
+
 #include <iostream>
 using namespace std;
 
+// Linear Search Function
 int linearSearch(int arr[], int n, int key) {
-  for (int i = 0; i < n; i++) {
-    if (arr[i] == key)
-      return i;
-  }
 
-  return -1;
+    // Check each element one by one
+    for (int i = 0; i < n; i++) {
+
+        if (arr[i] == key)
+            return i;  // Return index if found
+    }
+
+    return -1;  // Element not found
 }
 
+// Binary Search Function
 int binarySearch(int arr[], int n, int key) {
-  int low = 0;
-  int high = n - 1;
 
-  while (low <= high) {
-    int mid = (low + high) / 2;
+    int low = 0;
+    int high = n - 1;
 
-    if (arr[mid] == key)
-      return mid;
+    // Repeat until search range becomes empty
+    while (low <= high) {
 
-    else if (arr[mid] < key)
-      low = mid + 1;
+        // Find middle index
+        int mid = (low + high) / 2;
 
-    else
-      high = mid - 1;
-  }
+        if (arr[mid] == key)
+            return mid;  // Element found
 
-  return -1;
+        // Search in right half
+        else if (arr[mid] < key)
+            low = mid + 1;
+
+        // Search in left half
+        else
+            high = mid - 1;
+    }
+
+    return -1;  // Element not found
 }
 
 int main() {
-  int n, key;
 
-  cout << "Enter number of elements: ";
-  cin >> n;
+    int n, key;
 
-  int arr[n];
+    // Get array size
+    cout << "Enter number of elements: ";
+    cin >> n;
 
-  cout << "Enter elements: ";
-  for (int i = 0; i < n; i++)
-    cin >> arr[i];
+    int arr[n];
 
-  cout << "Enter element to search: ";
-  cin >> key;
+    // Read array elements
+    cout << "Enter elements: ";
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
 
-  int index;
+    // Get search element
+    cout << "Enter element to search: ";
+    cin >> key;
 
-  index = linearSearch(arr, n, key);
+    int index;
 
-  if (index != -1)
-    cout << "Linear Search: Element found at index " << index << endl;
-  else
-    cout << "Linear Search: Element not found" << endl;
+    // Perform Linear Search
+    index = linearSearch(arr, n, key);
 
-  index = binarySearch(arr, n, key);
+    if (index != -1)
+        cout << "Linear Search: Element found at index "
+             << index << endl;
+    else
+        cout << "Linear Search: Element not found" << endl;
 
-  if (index != -1)
-    cout << "Binary Search: Element found at index " << index << endl;
-  else
-    cout << "Binary Search: Element not found" << endl;
+    // Perform Binary Search
+    index = binarySearch(arr, n, key);
 
-  return 0;
+    if (index != -1)
+        cout << "Binary Search: Element found at index "
+             << index << endl;
+    else
+        cout << "Binary Search: Element not found" << endl;
+
+    return 0;
 }
